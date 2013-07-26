@@ -1,4 +1,9 @@
 Tiw::Application.routes.draw do
+  resources :users, :except => [:new, :edit] do
+    resources :lists, :except => [:new, :edit] do
+      resources :things, :except => [:new, :edit]
+    end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
