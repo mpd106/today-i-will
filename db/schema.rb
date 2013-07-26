@@ -11,9 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130726141613) do
+ActiveRecord::Schema.define(:version => 20130726142119) do
 
   create_table "things", :force => true do |t|
+    t.string  "description"
+    t.boolean "done"
   end
 
 end
