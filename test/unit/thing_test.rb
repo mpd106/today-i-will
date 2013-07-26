@@ -2,18 +2,22 @@ require 'test_helper'
 
 class ThingTest < ActiveSupport::TestCase
   test 'has a valid factory' do
-    FactoryGirl.create(:thing).should be_valid
+    thing = FactoryGirl.create(:thing)
+    assert_instance_of(Thing, thing)
   end
 
   test 'has a description' do
-    assert false
+    thing = FactoryGirl.create(:thing)
+    assert_respond_to(thing, :description)
   end
 
   test 'has a done flag' do
-    assert false
+    thing = FactoryGirl.create(:thing)
+    assert_respond_to(thing, :done)
   end
 
   test 'is associated with a list' do
-    assert false
+    thing = FactoryGirl.create(:thing)
+    assert_respond_to(thing, :list)
   end
 end
