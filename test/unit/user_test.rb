@@ -5,6 +5,10 @@ class UserTest < ActiveSupport::TestCase
     @user = FactoryGirl.create :user
   end
 
+  def assert_presence(model, field)
+    assert_match /can't be blank/, model.errors[field].join
+  end
+
   test 'has a valid factory' do
     assert_instance_of User, @user
   end
@@ -15,12 +19,8 @@ class UserTest < ActiveSupport::TestCase
 
   test 'requires name' do
     @user.name = nil
-    @user.save
-    assert_equal @user.errors[:name], ["can't be blank"]
-
-    @user.name = 'Matt'
-    result = @user.save
-    assert result
+    @user.valid?
+    assert_presence @user, :name
   end
 
   test 'has an email' do
@@ -29,17 +29,13 @@ class UserTest < ActiveSupport::TestCase
 
   test 'requires email' do
     @user.email = nil
-    @user.save
-    assert_match "can't be blank", @user.errors[:email].join
-
-    @user.email = 'matt@example.com'
-    result = @user.save
-    assert result
+    @user.valid?
+    assert_presence @user, :email
   end
 
   test 'email cannot be invalid' do
     @user.email = 'invalid email'
-    @user.save
+    @user.valid?
     assert_equal @user.errors[:email], ["is not an email"]
   end
 
