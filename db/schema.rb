@@ -11,14 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130726145541) do
+ActiveRecord::Schema.define(:version => 20130728113935) do
 
   create_table "lists", :force => true do |t|
+    t.integer "user_id"
   end
 
   create_table "things", :force => true do |t|
     t.string  "description"
     t.boolean "done"
+    t.integer "list_id"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string "name"
   end
 
 end

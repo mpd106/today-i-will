@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessor :name, :email
-  validates :name, presence: true
-  validates :email, presence: true
+ 
+  has_many :lists
 
-  has_many :lists 
+  validates :name, :presence => true
+  validates :email, :presence => true, :email => true
 end

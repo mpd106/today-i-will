@@ -1,5 +1,5 @@
 class Thing < ActiveRecord::Base
-  attr_accessor :description, :done
+  attr_accessible :description, :done
 
   belongs_to :list
 end
