@@ -57,4 +57,8 @@ class ThingTest < ActiveSupport::TestCase
     @thing.description = nil
     assert !@thing.valid?
   end
+
+  test 'list is a list' do
+    assert_kind_of List, @thing.list
+  end
 end

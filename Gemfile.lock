@@ -62,7 +62,10 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    metaclass (0.0.1)
     mime-types (1.23)
+    mocha (0.14.0)
+      metaclass (~> 0.0.1)
     multi_json (1.7.7)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -120,6 +123,7 @@ DEPENDENCIES
   factory_girl_rails
   jquery-rails
   json
+  mocha
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
   sqlite3

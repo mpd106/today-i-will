@@ -5,12 +5,22 @@ class UserTest < ActiveSupport::TestCase
     @user = FactoryGirl.create :user
   end
 
-  def assert_presence(model, field)
-    assert_match /can't be blank/, model.errors[field].join
-  end
-
   test 'has a valid factory' do
     assert_instance_of User, @user
+  end
+
+  test 'has a username' do
+    assert_respond_to @user, :username
+  end
+
+  test 'requires username' do
+    @user.username = nil
+    assert_presence @user, :username
+  end
+
+  test 'username must be unique' do
+    another_user = FactoryGirl.build :user
+    assert !another_user.valid?
   end
 
   test 'has a name' do
@@ -19,7 +29,6 @@ class UserTest < ActiveSupport::TestCase
 
   test 'requires name' do
     @user.name = nil
-    @user.valid?
     assert_presence @user, :name
   end
 
@@ -29,7 +38,6 @@ class UserTest < ActiveSupport::TestCase
 
   test 'requires email' do
     @user.email = nil
-    @user.valid?
     assert_presence @user, :email
   end
 
@@ -41,5 +49,11 @@ class UserTest < ActiveSupport::TestCase
 
   test 'has lists' do
     assert_respond_to @user, :lists
+  end
+
+  test 'supports mass assignment of email and name' do
+    assert_nothing_raised do
+      user = User.new name: "name", email: "matt@example.com"
+    end
   end
 end

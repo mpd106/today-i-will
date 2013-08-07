@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ListTests < ActiveSupport::TestCase
   def setup
-    @list = FactoryGirl.build(:list)
+    @list = FactoryGirl.create(:list)
   end
 
   test 'has a valid factory' do
@@ -18,12 +18,18 @@ class ListTests < ActiveSupport::TestCase
   end
 
   test 'is invalid without a user' do
-    @list.user = nil
-    assert !@list.valid?, "list is not being validated for presence"
+    list = FactoryGirl.build(:list)
+    list.user = nil
+    assert !list.valid?, "list is not being validated for presence"
   end
 
   test 'is invalid without a date' do
-    @list.date = nil
-    assert !@list.valid?, "list is not being validated for presence"
+    list = FactoryGirl.build(:list)
+    list.date = nil
+    assert !list.valid?, "list is not being validated for presence"
+  end
+
+  test 'user is a user' do
+    assert_kind_of User, @list.user
   end
 end
